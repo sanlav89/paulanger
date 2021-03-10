@@ -1,5 +1,6 @@
 #include <QCoreApplication>
-#include "statetable.h"
+#include "jumptable.h"
+#include "outputtable.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,11 +18,13 @@ int main(int argc, char *argv[])
                   << "2 - - 1 2 -"
                   << "- - 1 - - 1";
 
-    StateTable tableF(tableFContent, "Jump table");
-    StateTable tableG(tableGContent, "Output table");
+    JumpTable tableF(tableFContent, "Jump table");
+    OutputTable tableG(tableGContent, "Output table");
 
     tableF.display();
     tableG.display();
+
+    qDebug() << tableG.isCompatibleByOutputs(0, 3) << tableG.isCompatibleByOutputs(0, 1);
 
     return a.exec();
 }

@@ -26,7 +26,7 @@ StateTable::StateTable(const QStringList &states, const QString &title) :
             bool ok = false;
             int cellState = rowStatesStr[j].toInt(&ok);
             if (rowStatesStr[j] == "-") {
-                cellState = -1;
+                cellState = IDLE_STATE;
             } else if (!ok) {
                 this->clear();
                 qDebug() << Q_FUNC_INFO << "Wrong format of states cell" << i << j;
@@ -43,7 +43,7 @@ void StateTable::display()
     printf("%s\r\n", m_title.toLocal8Bit().data());
     for (int i = 0; i < this->size(); i++) {
         for (int j = 0; j < this->at(i).size(); j++) {
-            if (this->at(i).at(j) == -1) {
+            if (this->at(i).at(j) == IDLE_STATE) {
                 printf("  -");
             } else {
                 printf("%3d", this->at(i).at(j));

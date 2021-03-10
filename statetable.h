@@ -13,11 +13,13 @@ class StateTable : public QList<QList<int>>
 public:
     StateTable();
     StateTable(const QStringList &states, const QString &title = QString());
-    virtual void display();
-
+    void display();
     QString title() const;
     void setTitle(const QString &title);
 
+
+protected:
+    const int IDLE_STATE = -1;
 private:
     QString m_title;
 };
