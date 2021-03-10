@@ -5,21 +5,19 @@
 #include <QDebug>
 #include <iostream>
 #include <stdio.h>
+#include "statetableitem.h"
 
 using namespace std;
 
-class StateTable : public QList<QList<int>>
+class StateTable : public QList<QList<StateTableItem>>
 {
 public:
     StateTable();
     StateTable(const QStringList &states, const QString &title = QString());
-    void display();
+    virtual void display();
     QString title() const;
     void setTitle(const QString &title);
 
-
-protected:
-    const int IDLE_STATE = -1;
 private:
     QString m_title;
 };
