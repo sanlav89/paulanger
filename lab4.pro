@@ -11,7 +11,8 @@ SOURCES += \
         jumptable.cpp \
         main.cpp \
         outputtable.cpp \
-        statetable.cpp
+        statetable.cpp \
+        statetableitem.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,4 +22,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     jumptable.h \
     outputtable.h \
-    statetable.h
+    statetable.h \
+    statetableitem.h
