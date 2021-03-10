@@ -25,8 +25,18 @@ StateTableItem::StateTableItem(const int &state) : QVariant(state)
 {
 }
 
-StateTableItem::StateTableItem(const QList<QVariant> &compatibleStates) :
-    QVariant(compatibleStates)
+StateTableItem::StateTableItem(const QList<QPoint> &compatibleStates) :
+    QVariant()
+{
+    QList<QVariant> compatibleStatesVariant;
+    for (int i = 0; i < compatibleStates.size(); i++) {
+        compatibleStatesVariant.append(QVariant(compatibleStates[i]));
+    }
+    *this = StateTableItem(compatibleStatesVariant);
+}
+
+StateTableItem::StateTableItem(const QList<QVariant> &variantList) :
+    QVariant(variantList)
 {
 }
 

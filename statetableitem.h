@@ -18,7 +18,8 @@ public:
     StateTableItem(const QVariant &other);
     StateTableItem(const QString &stateStr);
     StateTableItem(const int &state);
-    StateTableItem(const QList<QVariant> &compatibleStates);
+    StateTableItem(const QList<QPoint> &compatibleStates);
+    StateTableItem(const QList<QVariant> &variantList);
 
     bool isIdleState() const;
     bool isErrorState() const;

@@ -9,7 +9,7 @@ OutputTable::OutputTable(const QStringList &states, const QString &title) :
 {
 }
 
-bool OutputTable::isCompatibleByOutputs(int col1, int col2)
+bool OutputTable::isCompatibleByOutputs(int col1, int col2) const
 {
     for (int i = 0; i < this->size(); i++) {
         if (!this->at(i).at(col1).isIdleState()
@@ -19,4 +19,17 @@ bool OutputTable::isCompatibleByOutputs(int col1, int col2)
         }
     }
     return true;
+}
+
+int OutputTable::colCount() const
+{
+    if (this->size() > 0) {
+        return this->at(0).size();
+    }
+    return 0;
+}
+
+int OutputTable::rowCount() const
+{
+    return this->size();
 }

@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include "jumptable.h"
 #include "outputtable.h"
+#include "advancedcompatibletable.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,9 +21,11 @@ int main(int argc, char *argv[])
 
     JumpTable tableF(tableFContent, "Jump table");
     OutputTable tableG(tableGContent, "Output table");
+    AdvancedCompatibleTable tableAC(&tableF, &tableG);
 
     tableF.display();
     tableG.display();
+    tableAC.display();
 
     qDebug() << tableG.isCompatibleByOutputs(0, 3) << tableG.isCompatibleByOutputs(0, 1);
 
