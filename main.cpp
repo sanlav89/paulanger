@@ -22,12 +22,11 @@ int main(int argc, char *argv[])
     JumpTable tableF(tableFContent, "Jump table");
     OutputTable tableG(tableGContent, "Output table");
     AdvancedCompatibleTable tableAC(&tableF, &tableG);
+    tableAC.setTitle("Advanced Compatible Table");
 
     tableF.display();
     tableG.display();
     tableAC.display();
-
-    qDebug() << tableG.isCompatibleByOutputs(0, 3) << tableG.isCompatibleByOutputs(0, 1);
 
     return a.exec();
 }
