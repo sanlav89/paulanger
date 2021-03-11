@@ -16,6 +16,9 @@ public:
             );
     int colCount() const;
     void display() override;
+
+    QList<QPoint> findIndexesOfState(const QPoint &state) const;
+    QList<QPoint> findNotCompatibleIndexes() const;
 };
 
 #endif // ADVANCEDCOMPATIBLETABLE_H

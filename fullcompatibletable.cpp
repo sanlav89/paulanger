@@ -19,17 +19,36 @@ FullCompatibleTable::FullCompatibleTable(
         this->append(rowStates);
     }
 
-    // Расставляем отметки "X"
-    for (int i = 1; i < advancedCompatibleTable->colCount(); i++) {
-        for (int j = 0; j < i; j++) {
-            if (advancedCompatibleTable->at(j).at(i).isNotCompatible()) {
-                // 1) Эсли это стостояние в новой таблице не отмечено X, отмечаем
-                if (!this->at(j).at(i).isNotCompatible()) {
-                    QList<StateTableItem> rowStates = this->at(j);
-                    rowStates.replace(i, QVariant(StateTableItem::StateNotCompatible));
-                    this->replace(j, rowStates);
-                }
-            }
+    // Заполнение состояниями несовместимости ("X")
+    setAllCellsCompatible(advancedCompatibleTable,
+                          advancedCompatibleTable->findNotCompatibleIndexes());
+}
+
+bool FullCompatibleTable::setCellNotCompatible(int j, int i)
+{
+    QList<StateTableItem> rowStates = this->at(j);
+    if (!rowStates.at(i).isNotCompatible()) {
+        rowStates.replace(i, QVariant(StateTableItem::StateNotCompatible));
+        this->replace(j, rowStates);
+        return true;
+    }
+    return false;
+}
+
+/*
+ * Рекуррентная штука
+ */
+void FullCompatibleTable::setAllCellsCompatible(
+        AdvancedCompatibleTable *advancedCompatibleTable,
+        const QList<QPoint> &indexes
+        )
+{
+    for (int i = 0; i < indexes.size(); i++) {
+        setCellNotCompatible(indexes[i].x(), indexes[i].y());
+        QList<QPoint> newIndexes = advancedCompatibleTable->findIndexesOfState(
+                    QPoint(indexes[i].x() + 1, indexes[i].y() + 1));
+        if (newIndexes.size() > 0) {
+            setAllCellsCompatible(advancedCompatibleTable, newIndexes);
         }
     }
 }

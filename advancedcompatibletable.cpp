@@ -55,3 +55,32 @@ void AdvancedCompatibleTable::display()
         printf("\r\n");
     }
 }
+
+QList<QPoint> AdvancedCompatibleTable::findIndexesOfState(const QPoint &state) const
+{
+    QList<QPoint> result;
+    for (int i = 1; i < colCount(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (!this->at(j).at(i).isEmpty() && !this->at(j).at(i).isNotCompatible()) {
+                QList<QPoint> states = this->at(j).at(i).compatibleStates();
+                if (states.contains(state)) {
+                    result.append(QPoint(j, i));
+                }
+            }
+        }
+    }
+    return result;
+}
+
+QList<QPoint> AdvancedCompatibleTable::findNotCompatibleIndexes() const
+{
+    QList<QPoint> result;
+    for (int i = 1; i < colCount(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (this->at(j).at(i).isNotCompatible()) {
+                result.append(QPoint(j, i));
+            }
+        }
+    }
+    return result;
+}
