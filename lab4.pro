@@ -13,6 +13,7 @@ SOURCES += \
         jumptable.cpp \
         main.cpp \
         outputtable.cpp \
+        set.cpp \
         statetable.cpp \
         statetableitem.cpp
 
@@ -26,5 +27,6 @@ HEADERS += \
     fullcompatibletable.h \
     jumptable.h \
     outputtable.h \
+    set.h \
     statetable.h \
     statetableitem.h
