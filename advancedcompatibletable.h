@@ -10,6 +10,7 @@ class AdvancedCompatibleTable : public StateTable
 public:
     AdvancedCompatibleTable();
     AdvancedCompatibleTable(JumpTable *jumpTable, OutputTable *outputTable);
+    int colCount() const;
     void display() override;
 };
 

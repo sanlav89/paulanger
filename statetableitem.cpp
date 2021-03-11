@@ -86,6 +86,13 @@ bool StateTableItem::isNotCompatible() const
     return (ok && state == StateNotCompatible);
 }
 
+bool StateTableItem::isEmpty() const
+{
+    bool ok = false;
+    int state = this->toInt(&ok);
+    return (ok && state == StateEmpty);
+}
+
 QList<QPoint> StateTableItem::compatibleStates() const
 {
     QList<QPoint> result;
@@ -101,7 +108,7 @@ QString StateTableItem::displayCompatibleStates() const
     result.append("[");
     if (isNotCompatible()) {
         result.append("X");
-    } else {
+    } else if (!isEmpty()) {
         for (int i = 0; i < compatibleStates().size(); i++) {
             result.append(QString::asprintf("%d,%d", compatibleStates()[i].x(),
                                                      compatibleStates()[i].y()));

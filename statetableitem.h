@@ -11,7 +11,8 @@ public:
     enum SpecialStates {
         StateIdle = -1,
         StateError = -2,
-        StateNotCompatible = -3
+        StateNotCompatible = -3,
+        StateEmpty = -4
     };
 
     StateTableItem();
@@ -26,6 +27,7 @@ public:
     int state() const;
     QString displayState() const;
     bool isNotCompatible() const;
+    bool isEmpty() const;
     QList<QPoint> compatibleStates() const;
     QString displayCompatibleStates() const;
 
