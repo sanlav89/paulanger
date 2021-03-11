@@ -2,6 +2,7 @@
 #include "jumptable.h"
 #include "outputtable.h"
 #include "advancedcompatibletable.h"
+#include "fullcompatibletable.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,12 +22,13 @@ int main(int argc, char *argv[])
 
     JumpTable tableF(tableFContent, "Jump table");
     OutputTable tableG(tableGContent, "Output table");
-    AdvancedCompatibleTable tableAC(&tableF, &tableG);
-    tableAC.setTitle("Advanced Compatible Table");
+    AdvancedCompatibleTable tableAC(&tableF, &tableG, "Advanced Compatible Table");
+    FullCompatibleTable tableFC(&tableAC, "Full Compatible Table");
 
     tableF.display();
     tableG.display();
     tableAC.display();
+    tableFC.display();
 
     return a.exec();
 }

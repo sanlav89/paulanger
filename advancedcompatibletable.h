@@ -8,8 +8,12 @@
 class AdvancedCompatibleTable : public StateTable
 {
 public:
-    AdvancedCompatibleTable();
-    AdvancedCompatibleTable(JumpTable *jumpTable, OutputTable *outputTable);
+    AdvancedCompatibleTable(const QString &title = QString());
+    AdvancedCompatibleTable(
+            JumpTable *jumpTable,
+            OutputTable *outputTable,
+            const QString &title = QString()
+            );
     int colCount() const;
     void display() override;
 };

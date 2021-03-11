@@ -1,9 +1,9 @@
 #include "statetable.h"
 
 
-StateTable::StateTable() :
+StateTable::StateTable(const QString &title) :
     QList<QList<StateTableItem>>(),
-    m_title(QString())
+    m_title(title)
 {
 }
 

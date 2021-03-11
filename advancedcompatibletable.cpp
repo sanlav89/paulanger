@@ -1,16 +1,18 @@
 #include "advancedcompatibletable.h"
 
-AdvancedCompatibleTable::AdvancedCompatibleTable() : StateTable()
+AdvancedCompatibleTable::AdvancedCompatibleTable(const QString &title) :
+    StateTable(title)
 {
 }
 
 AdvancedCompatibleTable::AdvancedCompatibleTable(
         JumpTable *jumpTable,
-        OutputTable *outputTable
+        OutputTable *outputTable,
+        const QString &title
         ) :
-     StateTable()
+     StateTable(title)
 {
-    // Заполнение пустыми
+    // Заполнение пустыми состояниями
     for (int i = 0; i < outputTable->colCount(); i++) {
         QList<StateTableItem> rowStates;
         for (int j = 0; j < outputTable->colCount(); j++) {

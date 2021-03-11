@@ -9,6 +9,7 @@ CONFIG -= app_bundle
 
 SOURCES += \
         advancedcompatibletable.cpp \
+        fullcompatibletable.cpp \
         jumptable.cpp \
         main.cpp \
         outputtable.cpp \
@@ -22,6 +23,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     advancedcompatibletable.h \
+    fullcompatibletable.h \
     jumptable.h \
     outputtable.h \
     statetable.h \

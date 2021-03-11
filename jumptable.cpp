@@ -1,8 +1,7 @@
 #include "jumptable.h"
 
-JumpTable::JumpTable() : StateTable()
+JumpTable::JumpTable(const QString &title) : StateTable(title)
 {
-
 }
 
 JumpTable::JumpTable(const QStringList &states, const QString &title) :

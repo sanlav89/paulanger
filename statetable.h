@@ -12,7 +12,7 @@ using namespace std;
 class StateTable : public QList<QList<StateTableItem>>
 {
 public:
-    StateTable();
+    StateTable(const QString &title = QString());
     StateTable(const QStringList &states, const QString &title = QString());
     virtual void display();
     QString title() const;

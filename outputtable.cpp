@@ -1,6 +1,6 @@
 #include "outputtable.h"
 
-OutputTable::OutputTable() : StateTable()
+OutputTable::OutputTable(const QString &title) : StateTable(title)
 {
 }
 
