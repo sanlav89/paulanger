@@ -47,6 +47,10 @@ void FullCompatibleTable::setAllCellsCompatible(
         setCellNotCompatible(indexes[i].x(), indexes[i].y());
         QList<QPoint> newIndexes = advancedCompatibleTable->findIndexesOfState(
                     QPoint(indexes[i].x() + 1, indexes[i].y() + 1));
+
+//        qDebug() << newIndexes;
+//        display();
+
         if (newIndexes.size() > 0) {
             setAllCellsCompatible(advancedCompatibleTable, newIndexes);
         }

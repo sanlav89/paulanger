@@ -63,7 +63,7 @@ QList<QPoint> AdvancedCompatibleTable::findIndexesOfState(const QPoint &state) c
         for (int j = 0; j < i; j++) {
             if (!this->at(j).at(i).isEmpty() && !this->at(j).at(i).isNotCompatible()) {
                 QList<QPoint> states = this->at(j).at(i).compatibleStates();
-                if (states.contains(state)) {
+                if (states.contains(state) && state != QPoint(j + 1, i + 1)) {
                     result.append(QPoint(j, i));
                 }
             }
