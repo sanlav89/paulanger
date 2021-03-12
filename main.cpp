@@ -13,6 +13,16 @@ int main(int argc, char *argv[])
     QStringList tableFContent;
     QStringList tableGContent;
 
+//    tableFContent << "- - 3 3 2 1"
+//                  << "- 1 4 5 - 2"
+//                  << "1 6 - 2 3 3"
+//                  << "- - 5 - 2 -";
+
+//    tableGContent << "- - 1 1 1 -"
+//                  << "- 2 2 2 - 2"
+//                  << "2 - - 1 - 2"
+//                  << "- - 1 - 1 -";
+
 //    tableFContent << "- 3 - 3 1 2"
 //                  << "- 4 1 5 2 -"
 //                  << "6 - 2 2 3 3"

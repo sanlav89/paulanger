@@ -21,11 +21,19 @@ void MultiSet::addMultiSet(const MultiSet &newMultiSet)
 void MultiSet::minimize()
 {
     QList<int> indexes;
-    for (int i = 0; i < this->size(); i++) {
-        for (int j = 0; j < this->size(); j++) {
-            if (this->at(j).isSubsetOfThis(this->at(i)) && i != j && !indexes.contains(i)) {
-                this->removeAt(i);
-                this->minimize();
+    bool needMinimized = true;
+    while (needMinimized) {
+        needMinimized = false;
+        for (int i = 0; i < this->size(); i++) {
+            for (int j = 0; j < this->size(); j++) {
+                if (this->at(j).isSubsetOfThis(this->at(i)) && i != j && !indexes.contains(i)) {
+                    this->removeAt(i);
+                    needMinimized = true;
+                    break;
+                }
+            }
+            if (needMinimized) {
+                break;
             }
         }
     }
