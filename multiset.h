@@ -19,6 +19,7 @@ public:
     MultiSet &operator&=(const Set &other);
 
     void display();
+    QString toString() const;
 
 };
 

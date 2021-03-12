@@ -18,6 +18,8 @@ public:
     QString title() const;
     void setTitle(const QString &title);
 
+    static QStringList contentFromFile(const QString &fileName);
+
 private:
     QString m_title;
 

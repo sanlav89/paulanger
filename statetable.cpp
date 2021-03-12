@@ -13,18 +13,7 @@ StateTable::StateTable(const QString &fileName, const QString &title) :
     QList<QList<StateTableItem>>(),
     m_title(title)
 {
-    QFile fin(fileName);
-    QTextStream sin(&fin);
-    QStringList states;
-    if (!fin.open(QIODevice::ReadOnly)) {
-        qDebug() << Q_FUNC_INFO << "Can't open file" << fileName;
-    } else {
-        while (!sin.atEnd()) {
-            states.append(sin.readLine());
-        }
-        fin.close();
-        initFromStringList(states);
-    }
+    initFromStringList(contentFromFile(fileName));
 }
 
 void StateTable::display()
@@ -46,6 +35,22 @@ QString StateTable::title() const
 void StateTable::setTitle(const QString &title)
 {
     m_title = title;
+}
+
+QStringList StateTable::contentFromFile(const QString &fileName)
+{
+    QFile fin(fileName);
+    QTextStream sin(&fin);
+    QStringList result;
+    if (!fin.open(QIODevice::ReadOnly)) {
+        qDebug() << Q_FUNC_INFO << "Can't open file" << fileName;
+    } else {
+        while (!sin.atEnd()) {
+            result.append(sin.readLine());
+        }
+        fin.close();
+    }
+    return result;
 }
 
 void StateTable::initFromStringList(const QStringList &states)

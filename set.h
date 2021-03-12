@@ -25,6 +25,7 @@ public:
     friend Set operator&(const Set &s1, const Set &s2);
 
     void display() const;
+    QString toString() const;
 
 private:
 

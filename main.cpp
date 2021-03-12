@@ -1,15 +1,14 @@
 #include <QCoreApplication>
-#include "jumptable.h"
-#include "outputtable.h"
-#include "advancedcompatibletable.h"
-#include "fullcompatibletable.h"
-#include "set.h"
-#include "multiset.h"
+#include "paulangerminimizer.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+// ------ Версия с чтением входных файлов --------------------------------------
+//    PaulAngerMinimizer pam(a.arguments()[1], a.arguments()[2]);
+
+// ------ Версия с формированием контента таблиц здесь -------------------------
     QStringList tableFContent;
     QStringList tableGContent;
 
@@ -68,54 +67,7 @@ int main(int argc, char *argv[])
 //                  << "2 - - 2 2 2"
 //                  << "1 - 2 - - 2"
 //                  << "- 1 - - 1 -";
-
-    JumpTable tableF(tableFContent, "Jump table");
-    tableF.display();
-
-    OutputTable tableG(tableGContent, "Output table");
-    tableG.display();
-
-//    JumpTable tableF(a.arguments()[1], "Jump table");
-//    tableF.display();
-//    OutputTable tableG(a.arguments()[2], "Output table");
-//    tableG.display();
-    AdvancedCompatibleTable tableAC(&tableF, &tableG, "Advanced Compatible Table");
-    tableAC.display();
-    FullCompatibleTable tableFC(&tableAC, "Full Compatible Table");
-    tableFC.display();
-
-    // Минимизация таблицы совместимости
-    MultiSet Lm; // Итоговый список множеств
-
-    // Первый шаг
-    Lm.addSet(Set(tableFC.colCount()));
-
-    // Последующие шаги (цикл по столбцам таблицы)
-    for (int i = tableFC.colCount() - 2; i >= 0; i--) {
-
-        // Формируется множество из совместимых по выходам состояний
-        Set currentSet;
-        for (int j = tableFC.colCount() - 1; j > i; j--) {
-            if (!tableFC.at(i).at(j).isNotCompatible()) {
-                currentSet.addNew(Set(j + 1));
-            }
-//            qDebug() << i + 1 << j + 1 << tableFC.at(i).at(j).isNotCompatible()
-//                     << tableFC.at(i).at(j).displayCompatibleStates();
-        }
-
-        // Создается временный список множеств
-        MultiSet LmTmp = Lm;
-        LmTmp &= currentSet;
-        LmTmp |= Set(i + 1);
-        LmTmp.minimize();
-
-        // Временный список добавляется в основной список множеств
-        Lm.addMultiSet(LmTmp);
-        Lm.minimize();
-    }
-
-    printf("Result List: \r\n");
-    Lm.display();
+    PaulAngerMinimizer pam(tableFContent, tableGContent);
 
     return a.exec();
 }

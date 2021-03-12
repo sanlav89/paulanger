@@ -14,6 +14,7 @@ SOURCES += \
         main.cpp \
         multiset.cpp \
         outputtable.cpp \
+        paulangerminimizer.cpp \
         set.cpp \
         statetable.cpp \
         statetableitem.cpp
@@ -29,6 +30,7 @@ HEADERS += \
     jumptable.h \
     multiset.h \
     outputtable.h \
+    paulangerminimizer.h \
     set.h \
     statetable.h \
     statetableitem.h

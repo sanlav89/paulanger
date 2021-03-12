@@ -74,6 +74,20 @@ void Set::display() const
     printf("}");
 }
 
+QString Set::toString() const
+{
+    QString result;
+    result.append(QString::asprintf("{"));
+    for (int i = 0; i < this->size(); i++) {
+        result.append(QString::asprintf("%d", this->at(i)));
+        if (i < this->size() - 1) {
+            result.append(QString::asprintf(","));
+        }
+    }
+    result.append(QString::asprintf("}"));
+    return result;
+}
+
 Set operator|(const Set &s1, const Set &s2)
 {
     Set result = s1;
