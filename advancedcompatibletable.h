@@ -19,6 +19,7 @@ public:
 
     QList<QPoint> findIndexesOfState(const QPoint &state) const;
     QList<QPoint> findNotCompatibleIndexes() const;
+    void clearCell(int j, int i);
 };
 
 #endif // ADVANCEDCOMPATIBLETABLE_H

@@ -84,3 +84,10 @@ QList<QPoint> AdvancedCompatibleTable::findNotCompatibleIndexes() const
     }
     return result;
 }
+
+void AdvancedCompatibleTable::clearCell(int j, int i)
+{
+    QList<StateTableItem> rowStates = this->at(j);
+    rowStates.replace(i, QVariant(StateTableItem::StateIdle));
+    this->replace(j, rowStates);
+}
