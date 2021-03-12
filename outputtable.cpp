@@ -5,8 +5,8 @@ OutputTable::OutputTable(const QStringList &states, const QString &title) :
 {
 }
 
-OutputTable::OutputTable(const QString &flieName, const QString &title) :
-    StateTable(flieName, title)
+OutputTable::OutputTable(const QString &fileName, const QString &title) :
+    StateTable(fileName, title)
 {
 }
 

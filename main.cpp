@@ -22,8 +22,10 @@ int main(int argc, char *argv[])
                   << "2 - - 1 2 -"
                   << "- - 1 - - 1";
 
-    JumpTable tableF(tableFContent, "Jump table");
-    OutputTable tableG(tableGContent, "Output table");
+//    qDebug() << a.arguments();
+
+    JumpTable tableF(a.arguments()[1], "Jump table");
+    OutputTable tableG(a.arguments()[2], "Output table");
     AdvancedCompatibleTable tableAC(&tableF, &tableG, "Advanced Compatible Table");
     FullCompatibleTable tableFC(&tableAC, "Full Compatible Table");
 
