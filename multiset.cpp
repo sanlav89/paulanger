@@ -32,7 +32,9 @@ void MultiSet::minimize()
     }
     qSort(indexes);
     for (int i = indexes.size() - 1; i >= 0; i--) {
-        this->removeAt(indexes[i]);
+        if (indexes[i] < this->size()) {
+            this->removeAt(indexes[i]);
+        }
     }
 }
 

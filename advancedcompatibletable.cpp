@@ -50,7 +50,7 @@ void AdvancedCompatibleTable::display()
     for (int i = 1; i < colCount(); i++) {
         printf("%2d : ", i + 1);
         for (int j = 0; j < i; j++) {
-            printf("%10s", this->at(j).at(i).displayCompatibleStates().toLocal8Bit().data());
+            printf("%20s", this->at(j).at(i).displayCompatibleStates().toLocal8Bit().data());
         }
         printf("\r\n");
     }
