@@ -10,8 +10,16 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-//    QStringList tableFContent;
-//    QStringList tableGContent;
+    QStringList tableFContent;
+    QStringList tableGContent;
+    tableFContent << "3 - - 3 1 2"
+                  << "4 - 1 5 2 -"
+                  << "- 1 2 2 6 3"
+                  << "5 - - - - 2";
+    tableGContent << "1 - - 1 - 1"
+                  << "2 - 2 2 2 -"
+                  << "- 2 - 1 2 -"
+                  << "1 - - - - 1";
 
 //    tableFContent << "- - 3 3 1 2"
 //                  << "- 1 4 5 2 -"
@@ -41,16 +49,16 @@ int main(int argc, char *argv[])
 //                  << "1 - 2 - - 2"
 //                  << "- 1 - - 1 -";
 
-//    JumpTable tableF(tableFContent, "Jump table");
-//    tableF.display();
-
-//    OutputTable tableG(tableGContent, "Output table");
-//    tableG.display();
-
-    JumpTable tableF(a.arguments()[1], "Jump table");
+    JumpTable tableF(tableFContent, "Jump table");
     tableF.display();
-    OutputTable tableG(a.arguments()[2], "Output table");
+
+    OutputTable tableG(tableGContent, "Output table");
     tableG.display();
+
+//    JumpTable tableF(a.arguments()[1], "Jump table");
+//    tableF.display();
+//    OutputTable tableG(a.arguments()[2], "Output table");
+//    tableG.display();
     AdvancedCompatibleTable tableAC(&tableF, &tableG, "Advanced Compatible Table");
     tableAC.display();
     FullCompatibleTable tableFC(&tableAC, "Full Compatible Table");

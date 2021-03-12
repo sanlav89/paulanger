@@ -22,18 +22,11 @@ void MultiSet::minimize()
 {
     QList<int> indexes;
     for (int i = 0; i < this->size(); i++) {
-        for (int j = i + 1; j < this->size(); j++) {
-            if (this->at(i).isSubsetOfThis(this->at(j))) {
-                indexes.append(j);
-            } else if (this->at(j).isSubsetOfThis(this->at(i))) {
-                indexes.append(i);
+        for (int j = 0; j < this->size(); j++) {
+            if (this->at(j).isSubsetOfThis(this->at(i)) && i != j && !indexes.contains(i)) {
+                this->removeAt(i);
+                this->minimize();
             }
-        }
-    }
-    qSort(indexes);
-    for (int i = indexes.size() - 1; i >= 0; i--) {
-        if (indexes[i] < this->size()) {
-            this->removeAt(indexes[i]);
         }
     }
 }
