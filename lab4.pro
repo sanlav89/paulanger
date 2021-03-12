@@ -12,6 +12,7 @@ SOURCES += \
         fullcompatibletable.cpp \
         jumptable.cpp \
         main.cpp \
+        multiset.cpp \
         outputtable.cpp \
         set.cpp \
         statetable.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     advancedcompatibletable.h \
     fullcompatibletable.h \
     jumptable.h \
+    multiset.h \
     outputtable.h \
     set.h \
     statetable.h \

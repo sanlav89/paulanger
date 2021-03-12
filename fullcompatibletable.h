@@ -11,6 +11,7 @@ public:
             AdvancedCompatibleTable *advancedCompatibleTable,
             const QString &title = QString()
             );
+    int maxStateNumber() const;
 
 private:
     bool setCellNotCompatible(int j, int i);

@@ -24,6 +24,11 @@ FullCompatibleTable::FullCompatibleTable(
                           advancedCompatibleTable->findNotCompatibleIndexes());
 }
 
+int FullCompatibleTable::maxStateNumber() const
+{
+    return colCount();
+}
+
 bool FullCompatibleTable::setCellNotCompatible(int j, int i)
 {
     QList<StateTableItem> rowStates = this->at(j);

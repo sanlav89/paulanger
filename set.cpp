@@ -1,19 +1,16 @@
 #include "set.h"
 
-Set::Set() : QVariant()
+Set::Set() : QList<int>()
 {
 }
 
-Set::Set(const QVariant &other) : QVariant(other)
+Set::Set(const QList<int> &other) : QList<int>(other)
 {
 }
 
-Set::Set(int value) : QVariant(value)
+Set::Set(int value) : QList<int>()
 {
-}
-
-Set::Set(const QList<QVariant> &elems) : QVariant(elems)
-{
+    this->append(value);
 }
 
 void Set::addNew(const Set &newValue)
@@ -21,7 +18,7 @@ void Set::addNew(const Set &newValue)
     *this |= newValue;
 }
 
-bool Set::isSubset(const Set &other) const
+bool Set::isSubsetOfThis(const Set &other) const
 {
     if ((*this | other) == *this) {
         return true;
@@ -38,10 +35,13 @@ Set &Set::operator|=(int value)
 
 Set &Set::operator|=(const Set &other)
 {
-    QList<QVariant> thisList = this->toList();
-    if (!thisList.contains(other)) {
-        thisList.append(other);
-        *this = QVariant(thisList);
+    if (other.size() != 0) {
+        for (int i = 0; i < other.size(); i++) {
+            if (!this->contains(other.at(i))) {
+                this->append(other.at(i));
+            }
+        }
+        qSort(*this);
     }
     return *this;
 }
@@ -54,21 +54,37 @@ Set &Set::operator&=(int value)
 
 Set &Set::operator&=(const Set &other)
 {
-    QList<QVariant> thisList = this->toList();
-    this->clear();
-    if (!thisList.contains(other)) {
-        *this = QVariant(other);
+    for (int value : *this) {
+        if (!other.contains(value)) {
+            removeOne(value);
+        }
     }
     return *this;
 }
 
-const Set &operator|(const Set &s1, const Set &s2)
+void Set::display() const
 {
-    return Set(s1) |= s2;
+    printf("{");
+    for (int i = 0; i < this->size(); i++) {
+        printf("%d", this->at(i));
+        if (i < this->size() - 1) {
+            printf(",");
+        }
+    }
+    printf("}");
 }
 
-const Set &operator&(const Set &s1, const Set &s2)
+Set operator|(const Set &s1, const Set &s2)
 {
-    return Set(s1) &= s2;
+    Set result = s1;
+    result |= s2;
+    return result;
+}
+
+Set operator&(const Set &s1, const Set &s2)
+{
+    Set result = s1;
+    result &= s2;
+    return result;
 }
 

@@ -9,10 +9,10 @@ class StateTableItem : public QVariant
 public:
 
     enum SpecialStates {
-        StateIdle = -1,
-        StateError = -2,
-        StateNotCompatible = -3,
-        StateEmpty = -4
+        StateIdle = -1, // для таблиц переходов и выходов
+        StateError = -2, // для всех
+        StateNotCompatible = -3, // для таблиц совместимостей
+        StateEmpty = -4 // // для таблиц совместимостей
     };
 
     StateTableItem();
@@ -22,10 +22,13 @@ public:
     StateTableItem(const QList<QPoint> &compatibleStates);
     StateTableItem(const QList<QVariant> &variantList);
 
+    // для таблиц переходов и выходов
     bool isIdleState() const;
     bool isErrorState() const;
     int state() const;
     QString displayState() const;
+
+    // для таблиц совместимостей
     bool isNotCompatible() const;
     bool isEmpty() const;
     QList<QPoint> compatibleStates() const;
