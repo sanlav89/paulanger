@@ -18,6 +18,10 @@ public:
     QString title() const;
     void setTitle(const QString &title);
 
+    void changeColumns(int i, int j);
+    QStringList content() const;
+    void replaceState(int i, int j, const StateTableItem &newState);
+
     static QStringList contentFromFile(const QString &fileName);
 
 private:

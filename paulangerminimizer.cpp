@@ -2,16 +2,20 @@
 
 PaulAngerMinimizer::PaulAngerMinimizer(
         const QStringList &tableFContent,
-        const QStringList &tableGContent
-        )
+        const QStringList &tableGContent,
+        bool displayOn
+        ) :
+    m_displayOn(displayOn)
 {
     mainProcess(tableFContent, tableGContent);
 }
 
 PaulAngerMinimizer::PaulAngerMinimizer(
         const QString &jumpTableFileName,
-        const QString &outputTableFileName
-        )
+        const QString &outputTableFileName,
+        bool displayOn
+        ) :
+    m_displayOn(displayOn)
 {
     mainProcess(StateTable::contentFromFile(jumpTableFileName),
                 StateTable::contentFromFile(outputTableFileName));
@@ -22,16 +26,47 @@ QString PaulAngerMinimizer::resultString() const
     return Lm.toString();
 }
 
+void PaulAngerMinimizer::setDisplayOn(bool displayOn)
+{
+    m_displayOn = displayOn;
+}
+
+bool PaulAngerMinimizer::isGoodVariant() const
+{
+    if (Lm.size() == 4) {
+        int cnt2 = 0;
+        int cnt3 = 0;
+        for (int i = 0; i < Lm.size(); i++) {
+            if (Lm.at(i).size() == 2) {
+                cnt2++;
+            } else if (Lm.at(i).size() == 3) {
+                cnt3++;
+            }
+        }
+        return (cnt2 == 2 && cnt3 == 2);
+    } else {
+        return false;
+    }
+}
+
 void PaulAngerMinimizer::mainProcess(const QStringList &tableFContent, const QStringList &tableGContent)
 {
     JumpTable tableF(tableFContent, "Jump table");
-    tableF.display();
+    if (m_displayOn) {
+        tableF.display();
+    }
     OutputTable tableG(tableGContent, "Output table");
-    tableG.display();
+    if (m_displayOn) {
+        tableG.display();
+    }
     AdvancedCompatibleTable tableAC(&tableF, &tableG, "Advanced Compatible Table");
-    tableAC.display();
+    if (m_displayOn) {
+        tableAC.display();
+    }
     FullCompatibleTable tableFC(&tableAC, "Full Compatible Table");
-    tableFC.display();
+    if (m_displayOn) {
+        tableFC.display();
+    }
 
     // Минимизация таблицы совместимости
     // Первый шаг
@@ -61,6 +96,8 @@ void PaulAngerMinimizer::mainProcess(const QStringList &tableFContent, const QSt
         Lm.minimize();
     }
 
-    printf("Result List: \r\n");
-    Lm.display();
+    if (m_displayOn) {
+        printf("Result List: \r\n");
+        Lm.display();
+    }
 }

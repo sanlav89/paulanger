@@ -10,17 +10,24 @@ class PaulAngerMinimizer
 public:
     PaulAngerMinimizer(
             const QStringList &tableFContent,
-            const QStringList &tableGContent
+            const QStringList &tableGContent,
+            bool displayOn = true
             ); // Для отладки
     PaulAngerMinimizer(
             const QString &jumpTableFileName,
-            const QString &outputTableFileName
+            const QString &outputTableFileName,
+            bool displayOn = true
             ); // Для релизной версии, которая читает данные из файла
 
     QString resultString() const;
 
+    void setDisplayOn(bool displayOn);
+
+    bool isGoodVariant() const;
+
 private:
     MultiSet Lm; // Итоговый список множеств
+    bool m_displayOn;
 
     void mainProcess(
             const QStringList &tableFContent,

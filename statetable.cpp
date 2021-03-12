@@ -37,6 +37,46 @@ void StateTable::setTitle(const QString &title)
     m_title = title;
 }
 
+void StateTable::changeColumns(int i, int j)
+{
+    QList<StateTableItem> tmp;
+    for (int k = 0; k < this->size(); k++) {
+        tmp.append(this->at(k).at(i));
+    }
+
+    for (int k = 0; k < this->size(); k++) {
+        QList<StateTableItem> tmp2 = this->at(k);
+        tmp2.replace(i, this->at(k).at(j));
+        this->replace(k, tmp2);
+    }
+
+    for (int k = 0; k < this->size(); k++) {
+        QList<StateTableItem> tmp2 = this->at(k);
+        tmp2.replace(j, tmp.at(k));
+        this->replace(k, tmp2);
+    }
+}
+
+QStringList StateTable::content() const
+{
+    QStringList result;
+    for (int i = 0; i < this->size(); i++) {
+        QString row;
+        for (int j = 0; j < this->at(i).size(); j++) {
+            row.append(this->at(i).at(j).displayState());
+        }
+        result << row;
+    }
+    return result;
+}
+
+void StateTable::replaceState(int i, int j, const StateTableItem &newState)
+{
+    QList<StateTableItem> tmp = this->at(i);
+    tmp.replace(j, newState);
+    this->replace(i, tmp);
+}
+
 QStringList StateTable::contentFromFile(const QString &fileName)
 {
     QFile fin(fileName);
