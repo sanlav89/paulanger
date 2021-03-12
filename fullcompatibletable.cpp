@@ -1,10 +1,5 @@
 #include "fullcompatibletable.h"
 
-FullCompatibleTable::FullCompatibleTable(const QString &title) :
-    AdvancedCompatibleTable(title)
-{
-}
-
 FullCompatibleTable::FullCompatibleTable(
         AdvancedCompatibleTable *advancedCompatibleTable, const QString &title
         ) :

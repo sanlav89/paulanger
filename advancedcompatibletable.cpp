@@ -1,7 +1,7 @@
 #include "advancedcompatibletable.h"
 
 AdvancedCompatibleTable::AdvancedCompatibleTable(const QString &title) :
-    StateTable(title)
+    StateTable(QStringList(), title)
 {
 }
 
@@ -10,7 +10,7 @@ AdvancedCompatibleTable::AdvancedCompatibleTable(
         OutputTable *outputTable,
         const QString &title
         ) :
-     StateTable(title)
+     StateTable(QStringList(), title)
 {
     // Заполнение пустыми состояниями
     for (int i = 0; i < outputTable->colCount(); i++) {

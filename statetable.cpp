@@ -1,15 +1,54 @@
 #include "statetable.h"
-
-
-StateTable::StateTable(const QString &title) :
-    QList<QList<StateTableItem>>(),
-    m_title(title)
-{
-}
+#include <QFile>
+#include <QTextStream>
 
 StateTable::StateTable(const QStringList &states, const QString &title) :
     QList<QList<StateTableItem>>(),
     m_title(title)
+{
+    initFromStringList(states);
+}
+
+StateTable::StateTable(const QString &fileName, const QString &title) :
+    QList<QList<StateTableItem>>(),
+    m_title(title)
+{
+    QFile fin(fileName);
+    QTextStream sin(&fin);
+    QStringList states;
+    if (!fin.open(QIODevice::ReadOnly)) {
+        qDebug() << Q_FUNC_INFO << "Can't open file" << fileName;
+    } else {
+        while (!sin.atEnd()) {
+            states.append(sin.readLine());
+        }
+        fin.close();
+        initFromStringList(states);
+    }
+}
+
+void StateTable::display()
+{
+    printf("%s\r\n", m_title.toLocal8Bit().data());
+    for (int i = 0; i < this->size(); i++) {
+        for (int j = 0; j < this->at(i).size(); j++) {
+            printf("%s", this->at(i).at(j).displayState().toLocal8Bit().data());
+        }
+        printf("\r\n");
+    }
+}
+
+QString StateTable::title() const
+{
+    return m_title;
+}
+
+void StateTable::setTitle(const QString &title)
+{
+    m_title = title;
+}
+
+void StateTable::initFromStringList(const QStringList &states)
 {
     int colSize = 0;
     for (int i = 0; i < states.size(); i++) {
@@ -33,25 +72,4 @@ StateTable::StateTable(const QStringList &states, const QString &title) :
         }
         this->append(rowStates);
     }
-}
-
-void StateTable::display()
-{
-    printf("%s\r\n", m_title.toLocal8Bit().data());
-    for (int i = 0; i < this->size(); i++) {
-        for (int j = 0; j < this->at(i).size(); j++) {
-            printf("%s", this->at(i).at(j).displayState().toLocal8Bit().data());
-        }
-        printf("\r\n");
-    }
-}
-
-QString StateTable::title() const
-{
-    return m_title;
-}
-
-void StateTable::setTitle(const QString &title)
-{
-    m_title = title;
 }

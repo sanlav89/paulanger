@@ -1,11 +1,12 @@
 #include "jumptable.h"
 
-JumpTable::JumpTable(const QString &title) : StateTable(title)
+JumpTable::JumpTable(const QStringList &states, const QString &title) :
+    StateTable(states, title)
 {
 }
 
-JumpTable::JumpTable(const QStringList &states, const QString &title) :
-    StateTable(states, title)
+JumpTable::JumpTable(const QString &fileName, const QString &title) :
+    StateTable(fileName, title)
 {
 }
 

@@ -1,11 +1,12 @@
 #include "outputtable.h"
 
-OutputTable::OutputTable(const QString &title) : StateTable(title)
+OutputTable::OutputTable(const QStringList &states, const QString &title) :
+    StateTable(states, title)
 {
 }
 
-OutputTable::OutputTable(const QStringList &states, const QString &title) :
-    StateTable(states, title)
+OutputTable::OutputTable(const QString &flieName, const QString &title) :
+    StateTable(flieName, title)
 {
 }
 

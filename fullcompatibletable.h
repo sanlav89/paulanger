@@ -6,7 +6,6 @@
 class FullCompatibleTable : public AdvancedCompatibleTable
 {
 public:
-    FullCompatibleTable(const QString &title = QString());
     FullCompatibleTable(
             AdvancedCompatibleTable *advancedCompatibleTable,
             const QString &title = QString()
